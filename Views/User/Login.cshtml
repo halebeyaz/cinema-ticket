@@ -1,0 +1,52 @@
+﻿@model List<web_technologies.Models.Admin>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 class="display-4">User Login</h1>
+
+<body>
+    <form method="post">
+        <fieldset>
+            <legend>Login User</legend>
+            <div>
+                <label for="username_l">username:</label>
+                <input type="text" name="username_l" value="" />
+            </div>
+            <div>
+                <label for="password_l">password:</label>
+                <input type="text" name="password_l" value="" />
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" value="Login" class="submit" />
+            </div>
+        </fieldset>
+    </form>
+
+    <form method="post">
+        <fieldset>
+            <legend>Sign up</legend>
+            <div>
+                <label for="username_s">username:</label>
+                <input type="text" name="username_s" value="" />
+            </div>
+            <div>
+                <label for="password_s">password:</label>
+                <input type="text" name="password_s" value="" />
+            </div>
+            <div>
+                <label for="email_s">email:</label>
+                <input type="text" name="email_s" value="" />
+            </div>
+            <div>
+                <label for="phone_s">phone:</label>
+                <input type="text" name="phone_s" value="" />
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" value="Sign up" class="submit" />
+            </div>
+        </fieldset>
+    </form>
+</body>

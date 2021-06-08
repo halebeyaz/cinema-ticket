@@ -1,0 +1,49 @@
+﻿@model List<web_technologies.Models.Movie>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("Login", "Admin"))
+{
+
+    <input type="submit" value="Admin Panel Login" />
+
+}
+@using (Html.BeginForm("Login", "User"))
+{
+
+    <input type="submit" value="User Login" />
+
+}
+<div class="text-center">
+    <h1 class="display-4">Home Page</h1>
+
+
+    <h2>buraya filmler ve gösterimde oldukları salon listesi gelecek</h2>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Saloon</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Movie_id</td>
+                <td>@item.Movie_name</td>
+                <td>@item.Movie_description</td>
+                <td>@item.Movie_date</td>
+                <td>@item.S_id</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
