@@ -1,0 +1,80 @@
+﻿@model web_cinema.Models.saloon
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+
+
+</head>
+<div class="modal-header" style="background-color: #AD1457; color: #FFC107 ">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h2 class="modal-title" style="text-align: center"> @Model.saloon_name</h2>
+</div>
+<div class="modal-body">
+    <table style="table-layout: fixed; width: 100%">
+
+        <tr>
+
+            <td>
+                @if (Model.movies.movie_poster == null)
+                {
+                    <img src="~/Content/Posters/indir.png" />
+                }
+                else
+                {
+                    <img src="@Model.movies.movie_poster" height="400" />
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>Saloon ID</td>
+            <td style="word-wrap: break-word">
+                @Model.saloon_id
+            </td>
+        </tr>
+
+        <tr>
+            <td>Saloon Name</td>
+            <td style="word-wrap: break-word">
+                @Model.saloon_name
+            </td>
+        </tr>
+        <tr>
+            <td>Saloon Date</td>
+            <td style="word-wrap: break-word">
+                @Model.movies.movie_beg_date
+                -
+                @Model.movies.movie_end_date
+            </td>
+        </tr>
+        <tr>
+            <td>Movie Name</td>
+            <td style="word-wrap: break-word">
+                @Model.movies.movie_name
+            </td>
+        </tr>
+        <tr>
+            <td>Movie Description</td>
+            <td style="word-wrap: break-word">
+                @Model.movies.movie_description
+
+            </td>
+        </tr>
+
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="material-icons">power_settings_new</i> Kapat</button>
+</div>
+

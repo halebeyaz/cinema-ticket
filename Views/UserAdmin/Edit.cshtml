@@ -1,0 +1,74 @@
+﻿@model web_cinema.Models.users
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Add User
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                @using (Html.BeginForm("Create", "UserAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+
+                    <label for="movie_name">Username</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @required = "reguired" } })
+                        </div>
+                    </div>
+                    <label for="movie_description">Email</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            @Html.EditorFor(model => model.user_email, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @required = "reguired" } })
+                        </div>
+                    </div>
+
+                    <label for="s_name">Password</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            @Html.EditorFor(model => model.user_password, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @required = "reguired", @type = "password" } })
+
+                        </div>
+                    </div>
+
+                    <label for="movie_beg_date">Phone</label>
+                    <div class="form-group">
+                        <div class="form-line">
+
+                            @Html.EditorFor(model => model.user_phone, new { htmlAttributes = new { @maxlength = "15", @class = "form-control", @required = "reguired" } })
+
+                        </div>
+                    </div>
+
+
+
+
+                    <br>
+                    <div align="center">
+                        <input type="submit" class="btn btn-success m-t-15 waves-effect" value="SAVE CHANGES">
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
