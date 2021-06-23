@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cinemaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" Nullable="false" />
+          <Property Name="admin_password" Type="varchar" MaxLength="45" />
+          <Property Name="admin_name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="movies">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="s_id" Type="int" />
+          <Property Name="movie_name" Type="varchar" MaxLength="50" />
+          <Property Name="movie_description" Type="varchar" MaxLength="500" />
+          <Property Name="movie_beg_date" Type="varchar" MaxLength="50" />
+          <Property Name="movie_poster" Type="varchar" MaxLength="500" />
+          <Property Name="movie_end_date" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="new_records">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="saloon_name" Type="varchar" MaxLength="45" />
+          <Property Name="movie_id" Type="int" />
+          <Property Name="s_id" Type="int" Nullable="false" />
+          <Property Name="movie_name" Type="varchar" MaxLength="50" />
+          <Property Name="movie_description" Type="varchar" MaxLength="500" />
+          <Property Name="movie_beg_date" Type="varchar" MaxLength="50" />
+          <Property Name="movie_poster" Type="varchar" MaxLength="500" />
+          <Property Name="movie_end_date" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="saloon">
+          <Key>
+            <PropertyRef Name="saloon_id" />
+          </Key>
+          <Property Name="saloon_id" Type="int" Nullable="false" />
+          <Property Name="saloon_name" Type="varchar" MaxLength="45" />
+          <Property Name="saloon_time" Type="varchar" MaxLength="45" />
+          <Property Name="m_id" Type="int" />
+        </EntityType>
+        <EntityType Name="seats">
+          <Key>
+            <PropertyRef Name="seat_id" />
+          </Key>
+          <Property Name="seat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seat_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="isBooked" Type="tinyint" />
+          <Property Name="s_id" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="45" />
+          <Property Name="user_phone" Type="varchar" MaxLength="45" />
+          <Property Name="user_email" Type="varchar" MaxLength="45" />
+          <Property Name="user_password" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="visitors">
+          <Key>
+            <PropertyRef Name="visitor_id" />
+          </Key>
+          <Property Name="visitor_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="m_id">
+          <End Role="movies" Type="Self.movies" Multiplicity="0..1" />
+          <End Role="saloon" Type="Self.saloon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="saloon">
+              <PropertyRef Name="m_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="s_id">
+          <End Role="saloon" Type="Self.saloon" Multiplicity="0..1" />
+          <End Role="seats" Type="Self.seats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="saloon">
+              <PropertyRef Name="saloon_id" />
+            </Principal>
+            <Dependent Role="seats">
+              <PropertyRef Name="s_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cinemaModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="cinema" store:Type="Tables" />
+          <EntitySet Name="movies" EntityType="Self.movies" Schema="cinema" store:Type="Tables" />
+          <EntitySet Name="new_records" EntityType="Self.new_records" Schema="cinema" store:Type="Tables" />
+          <EntitySet Name="saloon" EntityType="Self.saloon" Schema="cinema" store:Type="Tables" />
+          <EntitySet Name="seats" EntityType="Self.seats" Schema="cinema" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="cinema" store:Type="Tables" />
+          <EntitySet Name="visitors" EntityType="Self.visitors" Schema="cinema" store:Type="Tables" />
+          <AssociationSet Name="m_id" Association="Self.m_id">
+            <End Role="movies" EntitySet="movies" />
+            <End Role="saloon" EntitySet="saloon" />
+          </AssociationSet>
+          <AssociationSet Name="s_id" Association="Self.s_id">
+            <End Role="saloon" EntitySet="saloon" />
+            <End Role="seats" EntitySet="seats" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cinemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin" EntityType="cinemaModel.admin" />
+          <EntitySet Name="users" EntityType="cinemaModel.users" />
+          <EntitySet Name="visitors" EntityType="cinemaModel.visitors" />
+          <EntitySet Name="movies" EntityType="cinemaModel.movies" />
+          <EntitySet Name="saloon" EntityType="cinemaModel.saloon" />
+          <AssociationSet Name="m_id" Association="cinemaModel.m_id">
+            <End Role="movies" EntitySet="movies" />
+            <End Role="saloon" EntitySet="saloon" />
+          </AssociationSet>
+          <EntitySet Name="new_records" EntityType="cinemaModel.new_records" />
+          <EntitySet Name="seats" EntityType="cinemaModel.seats" />
+          <AssociationSet Name="s_id" Association="cinemaModel.s_id">
+            <End Role="saloon" EntitySet="saloon" />
+            <End Role="seats" EntitySet="seats" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="admin_password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="admin_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="user_phone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="user_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="user_password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="visitors">
+          <Key>
+            <PropertyRef Name="visitor_id" />
+          </Key>
+          <Property Name="visitor_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="movies">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="s_id" Type="Int32" />
+          <Property Name="movie_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="movie_description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="movie_beg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="movie_poster" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="movie_end_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="saloon" Relationship="cinemaModel.m_id" FromRole="movies" ToRole="saloon" />
+        </EntityType>
+        <EntityType Name="saloon">
+          <Key>
+            <PropertyRef Name="saloon_id" />
+          </Key>
+          <Property Name="saloon_id" Type="Int32" Nullable="false" />
+          <Property Name="saloon_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="saloon_time" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="m_id" Type="Int32" />
+          <NavigationProperty Name="movies" Relationship="cinemaModel.m_id" FromRole="saloon" ToRole="movies" />
+          <NavigationProperty Name="seats" Relationship="cinemaModel.s_id" FromRole="saloon" ToRole="seats" />
+        </EntityType>
+        <Association Name="m_id">
+          <End Type="cinemaModel.movies" Role="movies" Multiplicity="0..1" />
+          <End Type="cinemaModel.saloon" Role="saloon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="saloon">
+              <PropertyRef Name="m_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="new_records">
+          <Key>
+            <PropertyRef Name="s_id" />
+          </Key>
+          <Property Name="saloon_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="movie_id" Type="Int32" />
+          <Property Name="s_id" Type="Int32" Nullable="false" />
+          <Property Name="movie_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="movie_description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="movie_beg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="movie_poster" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="movie_end_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="seats">
+          <Key>
+            <PropertyRef Name="seat_id" />
+          </Key>
+          <Property Name="seat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seat_name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="isBooked" Type="SByte" />
+          <Property Name="s_id" Type="Int32" />
+          <NavigationProperty Name="saloon" Relationship="cinemaModel.s_id" FromRole="seats" ToRole="saloon" />
+        </EntityType>
+        <Association Name="s_id">
+          <End Type="cinemaModel.saloon" Role="saloon" Multiplicity="0..1" />
+          <End Type="cinemaModel.seats" Role="seats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="saloon">
+              <PropertyRef Name="saloon_id" />
+            </Principal>
+            <Dependent Role="seats">
+              <PropertyRef Name="s_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cinemaModelStoreContainer" CdmEntityContainer="cinemaEntities">
+          <EntitySetMapping Name="admin">
+            <EntityTypeMapping TypeName="cinemaModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="admin_name" ColumnName="admin_name" />
+                <ScalarProperty Name="admin_password" ColumnName="admin_password" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="cinemaModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="user_phone" ColumnName="user_phone" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="visitors">
+            <EntityTypeMapping TypeName="cinemaModel.visitors">
+              <MappingFragment StoreEntitySet="visitors">
+                <ScalarProperty Name="visitor_id" ColumnName="visitor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movies">
+            <EntityTypeMapping TypeName="cinemaModel.movies">
+              <MappingFragment StoreEntitySet="movies">
+                <ScalarProperty Name="movie_end_date" ColumnName="movie_end_date" />
+                <ScalarProperty Name="movie_poster" ColumnName="movie_poster" />
+                <ScalarProperty Name="movie_beg_date" ColumnName="movie_beg_date" />
+                <ScalarProperty Name="movie_description" ColumnName="movie_description" />
+                <ScalarProperty Name="movie_name" ColumnName="movie_name" />
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="saloon">
+            <EntityTypeMapping TypeName="cinemaModel.saloon">
+              <MappingFragment StoreEntitySet="saloon">
+                <ScalarProperty Name="m_id" ColumnName="m_id" />
+                <ScalarProperty Name="saloon_time" ColumnName="saloon_time" />
+                <ScalarProperty Name="saloon_name" ColumnName="saloon_name" />
+                <ScalarProperty Name="saloon_id" ColumnName="saloon_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_records">
+            <EntityTypeMapping TypeName="cinemaModel.new_records">
+              <MappingFragment StoreEntitySet="new_records">
+                <ScalarProperty Name="movie_end_date" ColumnName="movie_end_date" />
+                <ScalarProperty Name="movie_poster" ColumnName="movie_poster" />
+                <ScalarProperty Name="movie_beg_date" ColumnName="movie_beg_date" />
+                <ScalarProperty Name="movie_description" ColumnName="movie_description" />
+                <ScalarProperty Name="movie_name" ColumnName="movie_name" />
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="saloon_name" ColumnName="saloon_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seats">
+            <EntityTypeMapping TypeName="cinemaModel.seats">
+              <MappingFragment StoreEntitySet="seats">
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+                <ScalarProperty Name="isBooked" ColumnName="isBooked" />
+                <ScalarProperty Name="seat_name" ColumnName="seat_name" />
+                <ScalarProperty Name="seat_id" ColumnName="seat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
