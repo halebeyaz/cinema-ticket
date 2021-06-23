@@ -1,0 +1,78 @@
+﻿@model web_cinema.Models.new_records
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Edit Saloon Details
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                @using (Html.BeginForm("Edit", "SaloonAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <label for="movie_poster">Movie Poster</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="file" id="File" name="File" accept=".jpg,.JPG,.png,.PNG,jpeg,.JPEG" class="form-control">
+                        </div>
+                    </div>
+
+                    <label for="movie_name">Movie Name</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            @Html.EditorFor(model => model.movie_name, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @required = "reguired" } })
+                        </div>
+                    </div>
+                    <label for="movie_description">Movie Description</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            @Html.EditorFor(model => model.movie_description, new { htmlAttributes = new { @class = "form-control", @maxlength = "500", @required = "reguired" } })
+                        </div>
+                    </div>
+
+                  
+
+                    <label for="movie_beg_date">Beginning Date</label>
+                    <div class="form-group">
+                        <div class="form-line">
+
+                            @Html.EditorFor(model => model.movie_beg_date, new { htmlAttributes = new { @class = "form-control", @required = "reguired" } })
+
+                        </div>
+                    </div>
+                    <label for="movie_end_date">Ending Date</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            @Html.EditorFor(model => model.movie_end_date, new { htmlAttributes = new { @class = "form-control", @required = "reguired" } })
+
+                        </div>
+                    </div>
+
+
+
+                    <br>
+                    <div align="center">
+                        <input type="submit" class="btn btn-success m-t-15 waves-effect" value="SAVE CHANGES">
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

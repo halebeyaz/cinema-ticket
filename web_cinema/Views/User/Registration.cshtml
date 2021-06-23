@@ -1,0 +1,116 @@
+﻿@model web_cinema.Models.users
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Registration</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+    <div class="form-horizontal">
+        <h4>users</h4>
+        <hr />
+        <div class="container">
+
+            <form class="well form-horizontal" action=" " method="post" id="contact_form">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+
+
+
+                    <!-- Text input-->
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Username</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                @*<input name="user_name" placeholder="Username" class="form-control" type="text">*@
+                                @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @name = "user_name", @placeholder = "UserName", @type = "text" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Password</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                @*<input name="user_password" placeholder="Password" class="form-control" type="password">*@
+                                @Html.EditorFor(model => model.user_password, new { htmlAttributes = new { @name = "user_password", @placeholder = "Password", @type = "password" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Confirm Password</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                @*<input name="confirm_password" placeholder="Confirm Password" class="form-control" type="password">*@
+                                @Html.EditorFor(model => model.user_password, new { htmlAttributes = new { @name = "confirm_password", @placeholder = "Confirm Password", @type = "password" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">E-Mail</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                @*<input name="email" placeholder="E-Mail Address" class="form-control" type="text">*@
+                                @Html.EditorFor(model => model.user_email, new { htmlAttributes = new { @name = "email", @placeholder = "E-Mail Address", @type = "text" } })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Contact No.</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                @*<input name="contact_no" placeholder="" class="form-control" type="text">*@
+                                @Html.EditorFor(model => model.user_phone, new { htmlAttributes = new { @name = "contact_no", @placeholder = "", @type = "text" } })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <br>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div><!-- /.container -->
+
+</html>

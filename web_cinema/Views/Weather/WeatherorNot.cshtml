@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+</head>
+<h2>Weather Js</h2>
+
+@*<p id="name"></p>
+    <p id="temp"></p>
+    <p id="humidity"></p>*@
+@*<button>Get Weather</button>*@
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/knockout-2.0.0.js"></script>
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+<div class="col-md-12">
+    <h1>Current Conditions in <span data-bind="text:name"></span></h1>
+
+</div>
+
+<div class="col-md-12">
+    Temperature is <span data-bind="text:main.temp"></span> &deg; F
+
+</div>
+<script>
+    var weather = Object();
+
+    $(document).ready(function () {
+
+      /*  $("button").click(function () {*/
+            $.get("@Url.Action("GetWeather","Login")", function (response) {
+
+                console.log(response);
+                $("#name").text(response.name);
+                $("#temp").text(response.main.temp);
+                $("#humidity").text(response.main.humidity);
+
+                weather = ko.mapping.fromJS(response);
+                ko.applyBindings(weather);
+           /* });*/
+        });
+    });
+
+
+</script>
